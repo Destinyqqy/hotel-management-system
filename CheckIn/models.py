@@ -1,12 +1,12 @@
 from django.db import models
 
 # Create your models here.
-TypeOfRoom=((1,"高级大床房"),(2,"豪华双人大床房"),(3,"尊贵大床房"))
-SEX=((1,"男"),(2,"女"))
+TypeOfRoom=(('1',"高级大床房"),('2',"豪华双人大床房"),('3',"尊贵大床房"))
+SEX=(('1',"男"),('0',"女"))
 
 
 class room(models.Model):
-    room_id=models.CharField(max_length=30,primary_key=True)
+    room_id=models.CharField(max_length=30,primary_key=True,default="000")
     room_type=models.CharField(choices=TypeOfRoom,max_length=30)
     room_floor=models.PositiveIntegerField()
     room_deposit=models.PositiveIntegerField()
@@ -28,7 +28,7 @@ class customer(models.Model):
     is_checked=models.BooleanField()
     agree_record=models.BooleanField()
     room_id=models.ForeignKey(room,on_delete=models.CASCADE)
-    face=models.ImageField()
+    face=models.ImageField(blank=True)
 
 
 class preferred_food(models.Model):
