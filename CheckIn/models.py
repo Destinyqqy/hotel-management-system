@@ -54,6 +54,12 @@ class customer(models.Model):
         verbose_name='当前客户信息'
         verbose_name_plural='当前客户信息'
 
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name_plural = '当前客户信息'
+        verbose_name= '当前客户信息'
+
 
 class preferred_food(models.Model):
     '''菜品偏好'''
