@@ -18,7 +18,7 @@ class prefered_foodAdmin(admin.ModelAdmin):
 class dishclassAdmin(admin.ModelAdmin):
     list_display = ('classname','dishclassno')
 class dishAdmin(admin.ModelAdmin):
-    list_display = ('name','dishclassno')
+    list_display = ('dishno','name','dishclassno')
 
 admin.site.register(room,roomAdmin)
 admin.site.register(customer,customerAdmin)
