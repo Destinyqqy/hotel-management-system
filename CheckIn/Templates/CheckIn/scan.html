@@ -12,7 +12,7 @@
   <div><button id="back"><a href="welcome.html" style="color: coral;font-size: 20px;">返回首页</a></button></div>
      <video id="video" width="480" height="320" controls></video>
   <div>
-    <button id="capture">拍照</button>
+      <button id="capture"><a href={% url 'CheckIn:ShowScanInfo' 1 %}>拍照</a></button>
     <h4 id="hint">将脸对准取景框确认身份 2s后自动获取人像</h4>
   </div>
   <canvas id="canvas" width="480" height="320"></canvas>

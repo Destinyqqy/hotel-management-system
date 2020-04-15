@@ -5,7 +5,6 @@ from .CurrUser import CurrUser
 cu=CurrUser(id='123456789123456789',sex='男',name='xiaoming')
 
 def index(request):
-    #cu=CurrUser.get_instance()
     return render(request, 'CheckIn/welcome.html')
 
 
@@ -63,6 +62,9 @@ def SelectRoomType(request,room_type):
 
 def SelectLocation(request,room_id):
     if room_id =='12345':
-        return render(request,'CheckIn/privacyPolicy.html')
+        room_type = 'aaa'
+        room_floor = 1
+        room_map = {'room_id': room_id, 'room_type': room_type, 'room_floor': room_floor}
+        return render(request,'CheckIn/map.html',room_map)
     else:
-        return render(request, 'CheckIn/scan.html')
+        return render(request, 'CheckIn/welcome.html')
