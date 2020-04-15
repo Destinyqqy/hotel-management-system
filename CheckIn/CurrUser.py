@@ -1,6 +1,6 @@
 import os
 import sys
-import cv2
+# import cv2
 from CheckIn import models
 
 class CurrUser(object):
@@ -11,10 +11,11 @@ class CurrUser(object):
         self.name=name
         self.agreeprivacy=agreeprivacy
         self.face=face
-        self.isfirst=False if models.past_customer.objects.get(pcid=id) else True
+        self.isfirst=False if models.past_customer.objects.get(id=id) else True
         self.isbooked=True if models.customer.objects.get(cid=id) else False
 
-    def facesetter(self,facePath):
-        self.face=cv2.imread(facePath)
+
+    #def facesetter(self,facePath):
+       # self.face=cv2.imread(facePath)
 
         

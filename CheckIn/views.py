@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from .models import customer,room
-from django.shortcuts import HttpResponse
+from .CurrUser import CurrUser
 # Create your views here.
+cu=CurrUser(id='123456789123456789',sex='男',name='xiaoming')
+
 def index(request):
+    #cu=CurrUser.get_instance()
     return render(request, 'CheckIn/welcome.html')
 
 
@@ -21,40 +24,33 @@ def GetRoom(Id):
 
 
 def ShowScaning(request):
-    # 创建静态单例
-    # CurrUser cu
     return render(request,'CheckIn/scan.html')
 
 
 def ShowScanInfo(request,img):
     # 处理base64的img
-    # if HongRuan(cu.face,Img)
-    # person_dict={'id':cu.id,'name':cu.name,'sex':cu.sex}
-    # return render(request,'CheckIn/personInfo.html',person_dict)
-    pass
+    if HongRuan(cu.face,img):
+        person_dict={'id':cu.id,'name':cu.name,'sex':cu.sex}
+        return render(request,'CheckIn/personInfo.html',person_dict)
+    return render(request, 'CheckIn/welcome.html')
 
 
 def SplitFlow(request):
-    #if cu.isfirst:
-    return render(request,'CheckIn/privacyPolicy.html')
-'''
+    if cu.isfirst:
+        return render(request,'CheckIn/privacyPolicy.html')
     if cu.isbooked:
         return render(request,'CheckIn/Map.html')
     else:
-
-    return render(request,'CheckIn/roomType.html')
-'''
+        return render(request,'CheckIn/roomType.html')
 
 
 def AgreePrivacy(request,agree):
     if agree==0:
         return render(request, 'CheckIn/welcome.html')
-    '''
     if cu.isbooked:
         return render(request,"CheckIn/Map.html")
-    '''
-    # else
-    return render(request,"CheckIn/roomType.html")
+    else:
+        return render(request,"CheckIn/roomType.html")
 
 
 # 以下为测试代码
