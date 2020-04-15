@@ -1,7 +1,7 @@
 import os
 import sys
 # import cv2
-from CheckIn import models
+from .models import past_customer,customer
 
 class CurrUser(object):
     '''当前客户类'''
@@ -11,8 +11,17 @@ class CurrUser(object):
         self.name=name
         self.agreeprivacy=agreeprivacy
         self.face=face
-        self.isfirst=False if models.past_customer.objects.get(id=id) else True
-        self.isbooked=True if models.customer.objects.get(cid=id) else False
+        try:
+            pcquery=past_customer.objects.get(id=id)
+        except past_customer.DoesNotExist:
+            pcquery=None
+        try:
+            croom=customer.objects.get(room_id=id)
+        except customer.DoesNotExist:
+            croom=None
+
+        self.isfirst=False if pcquery else True
+        self.isbooked=True if croom else False
 
 
     #def facesetter(self,facePath):

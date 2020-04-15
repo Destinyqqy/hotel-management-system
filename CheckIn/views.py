@@ -19,7 +19,7 @@ def GetCus(Id):
 
 
 def GetRoom(Id):
-    r= room.objects.get(id=Id)
+    r= room.objects.get(room_id=Id)
     return r
 
 
