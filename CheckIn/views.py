@@ -59,6 +59,24 @@ def PersonInfo(request):
 def SelectRoomType(request,room_type):
     if room_type =='aaa':
         return render(request, 'CheckIn/position.html')
+    # try:
+    #     roomquery=room.objects.filter(room_type=room_type)
+    # except room.DoesNotExist:
+    #     roomquery=None
+    # floor_list=roomquery.values_list('room_floor',flat=True).distinct()  #找到floor 列表
+
+    # room_dict={}
+    # for floor in floor_list:
+    #     floor_room=[]
+    #     for eachroom in roomquery:
+    #         if eachroom.room_floor==floor:
+    #             r={'room_id':eachroom.roomid,'room_type':eachroom.room_type,
+    #             'room_floor':eachroom.room_floor,'room_deposit':eachroom.room_deposit,
+    #             'room_is_booked':eachroom.room_is_booked}
+    #             floor_room.append(r)
+    #     room_dict[floor]=floor_room
+    
+    # return render(request,'CheckIn/position.html',room_dict)
 
 def SelectLocation(request,room_id):
     if room_id =='12345':
@@ -68,3 +86,13 @@ def SelectLocation(request,room_id):
         return render(request,'CheckIn/map.html',room_map)
     else:
         return render(request, 'CheckIn/welcome.html')
+    # try:
+    #     roomselect=room.objects.get(room_id=room_id)
+    # except room.DoesNotExist:
+    #     roomselect=None
+    # if roomselect:
+    #     room_map={'room_id':roomselect.room_id,'room_type':roomselect.room_type,
+    #         'room_floor':roomselect.roomfloor}
+    #     return render(request,'CheckIn/map.html',room_map)
+    # else:
+    #     return render(request,'CheckIn/welcome.html')
