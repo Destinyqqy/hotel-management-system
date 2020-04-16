@@ -80,11 +80,11 @@ def SelectRoomType(request,room_type):
          floor_room=[]
          for eachroom in roomquery:
              if eachroom.room_floor==floor:
-                 r={'room_id':eachroom.roomid,'room_type':eachroom.room_type,
+                 r={'room_id':eachroom.room_id,'room_type':eachroom.room_type,
                  'room_floor':eachroom.room_floor,'room_deposit':eachroom.room_deposit,
                 'room_is_booked':eachroom.room_is_booked}
                  floor_room.append(r)
-         room_list[floor]=floor_room
+         room_list.append(floor_room)
 
      return render(request,'CheckIn/position.html',{'room_dict':room_list})
 
@@ -104,7 +104,7 @@ def SelectLocation(request,room_id):
         roomselect=None
     if roomselect:
         room_map={'room_id':roomselect.room_id,'room_type':roomselect.room_type,
-            'room_floor':roomselect.roomfloor}
+            'room_floor':roomselect.room_floor}
         return render(request,'CheckIn/map.html',room_map)
     else:
         return render(request,'CheckIn/welcome.html')
