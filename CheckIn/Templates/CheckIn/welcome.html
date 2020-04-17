@@ -1,11 +1,13 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="content-type" content="text/html; charset=gbk">
         <title>欢迎界面</title>
-        <link rel="stylesheet" href="css/welcome.css">
+        <link rel="stylesheet" href="{% static 'css/welcome.css' %}">
     </head>
-    <body>
+    <body style="background-image: url({% static "img/bkg.png"%});">
         <div>
             <h1 id="title">
                 欢迎使用酒店服务系统
