@@ -48,7 +48,6 @@ h3 span{
 h4.p-mask {
     color: rgb(108, 110, 129);
     font-size: 28px;
-    font-style:bold;
     letter-spacing: 1px;
     text-align: center;
     padding: 14px 10px 20px;
@@ -113,7 +112,7 @@ h4.p-mask span {
 }
 
 .popup .close:hover {
-    color: #7870fb;
+    color: rgb(0, 12, 117);
 }
 
 #banner{

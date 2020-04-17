@@ -119,3 +119,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 在html引用静态文件
+# 第一步
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+# 第二步
+STATICFILES_DIRS=[
+    ("css", os.path.join(STATIC_ROOT, 'css')),
+    ("img", os.path.join(STATIC_ROOT, 'pic')),
+    ("js", os.path.join(STATIC_ROOT, 'js')),
+]
+
+
+

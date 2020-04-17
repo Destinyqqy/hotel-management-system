@@ -9,7 +9,7 @@
 </head>
 <body>
 	<!-- 房型菜单 -->
-	<section class="portfolio">
+	<section class="portfolio" id="gallery">
 		<div class="container">
 			<div class="banner-section">
                 <img src="pic/banner.png" id="banner"/>
@@ -52,7 +52,7 @@
 			<img class="img-popup" src="pic/roomType1.png" alt="">
             <h4 class="p-mask">高级大床房 - - <span>￥689</span></h4>
             <h5 class="typeintro">入住两人|含早餐|免费使用WIFI<br/></h5>
-			<button class="orderButton"><a href={% url 'CheckIn:SelectRoomType' 'roomType1''%} >现在预定</a></button>
+			<button class="orderButton"><a href={% url 'CheckIn:SelectRoomType' '高级大床房'%} >现在预定</a></button>
 			<a class="close" href="#gallery">×</a>
 		</div>
 	</div>
@@ -63,7 +63,7 @@
 			<img class="img-popup" src="pic/roomType2.png" alt="">
             <h4 class="p-mask">豪华双人大床房 - - <span>￥789</span></h4>
             <h5 class="typeintro">入住两人|含两人份早餐|免费使用WIFI<br/>免费使用健身房<br/></h5>
-            <button class="orderButton"><a href={% url 'CheckIn:SelectRoomType' 'roomType2'%} >现在预定</a></button>
+            <button class="orderButton"><a href={% url 'CheckIn:SelectRoomType' '豪华双人大床房'%} >现在预定</a></button>
 			<a class="close" href="#gallery">×</a>
 		</div>
 	</div>
@@ -74,7 +74,7 @@
 			<img class="img-popup" src="pic/roomType3.png" alt="">
             <h4 class="p-mask">尊贵大床房 - - <span>￥889</span></h4>
             <h5 class="typeintro">入住两人|含早餐|免费使用WIFI<br/>赠SPA体验|免费使用健身房<br/></h5>
-			<button class="orderButton"><a href={% url 'CheckIn:SelectRoomType' 'roomType3'%} >现在预定</a></button>
+			<button class="orderButton"><a href={% url 'CheckIn:SelectRoomType' '尊贵大床房'%} >现在预定</a></button>
 			<a class="close" href="#gallery">×</a>
 		</div>
 	</div>
