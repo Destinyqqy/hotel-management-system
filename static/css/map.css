@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-image: url(../pic/bkg.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-color: rgb(4, 12, 30);
+}
+
+p.t {
+    color: rgb(255, 255, 255);
+    font-size: 1.5em;
+    position: relative;
+    left: 30px;
+    top: 300px;
+}
+
+.button1 {
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    padding: 5px 10px;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    text-decoration:none ;
+    color:coral;
+}
+
+.button1:hover {
+    background-color: orange;
+    color: white;
+}
