@@ -5,10 +5,20 @@
     <title>后端测试html,前端做好后,请直接替换此html</title>
 </head>
 <body>
-<button><a href={% url 'CheckIn:SelectLocation' '12345'%}>1</a></button>
-<button><a href={% url 'CheckIn:SelectLocation' '23333'%}>2</a></button>
-<button><a href={% url 'CheckIn:SelectLocation' '54322'%}>3</a></button>
-<button><a href={% url 'CheckIn:SelectLocation' '123'%}>4</a></button>
-<button><a href={% url 'CheckIn:SelectLocation' '123456'%}>5</a></button>
+
+{% for i in room_dict %}
+    {% with room_floor=i %}
+        {% for j in room_floor %}
+            <button>
+                <a href={% url 'CheckIn:SelectLocation' j.room_id%}>
+                    {{j.room_id}}
+                </a>
+            </button>
+        {% endfor %}
+    {% endwith %}
+    <br/>
+{% endfor %}
+
+
 </body>
 </html>
