@@ -1,8 +1,8 @@
 from django.db import models
 
 # Create your models here.
-TypeOfRoom=(('1',"高级大床房"),('2',"豪华双人大床房"),('3',"尊贵大床房"))
-SEX=(('1',"男"),('0',"女"))
+TypeOfRoom=(('高级大床房',"高级大床房"),('豪华双人大床房',"豪华双人大床房"),('尊贵大床房',"尊贵大床房"))
+SEX=(('男',"男"),('女',"女"))
 
 
 class room(models.Model):

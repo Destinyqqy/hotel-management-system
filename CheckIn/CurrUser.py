@@ -12,11 +12,11 @@ class CurrUser(object):
         self.agreeprivacy=agreeprivacy
         self.face=face
         try:
-            pcquery=past_customer.objects.get(id=id)
+            pcquery=past_customer.objects.filter(id=id)
         except past_customer.DoesNotExist:
             pcquery=None
         try:
-            croom=customer.objects.get(room_id=id)
+            croom=customer.objects.filter(room_id=id)
         except customer.DoesNotExist:
             croom=None
 
