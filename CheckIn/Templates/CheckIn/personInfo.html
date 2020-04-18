@@ -1,14 +1,21 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>后端测试html,前端做好后,请直接替换此html</title>
-    <link rel="stylesheet" href="../../../static/css/welcome.css">
+    <meta http-equiv="content-type" content="text/html; charset=gbk">
+    <title>个人信息</title>
+    <link rel="stylesheet" href="{% static 'css/personInfo.css' %}">
 </head>
 <body>
-    <h1>您的姓名：{{ name }}</h1>
-    <h1>您的性别：{{ sex }}</h1>
-    <h1>您的身份证号：{{ id }}</h1>
-    <button><a href="SplitFlow/" >确认</a></button>
+<div id="showcase">
+    <h1>您的身份信息</h1>
+    <h2><br/>姓名：{{ name }}<br/></h2>
+    <h2><br/>性别：{{ sex }}<br/></h2>
+    <h2><br/>身份证号：{{ id }}<br/></h2>
+    <button class="correct"><a href="SplitFlow/" >正确</a></button>
+    <button class="incorrect"><a href="../scan/" >错误</a></button>
+</div>
+
 </body>
 </html>
