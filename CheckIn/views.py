@@ -1,10 +1,14 @@
+
 from django.shortcuts import render
 from .models import customer,room
 from .CurrUser import CurrUser
+from CheckIn.faceRec.face_rec import faceRec
+import cv2
+
 
 try:
     # 类的各属性理论上应在__init__函数中赋值，而不是在此处赋值
-    cu = CurrUser(id='123456789123456789',sex='男',name='xiaoming')
+    cu = CurrUser(id='123456789123456789',sex='男',name='xiaoming',face='C:/Users/huawei/Desktop/faceLib/8.jpg')
 except ValueError:
     cu = CurrUser(id='000000000000000000', sex='男', name='I_am_error')
 
@@ -14,7 +18,8 @@ def index(request):
 
 
 def HongRuan(img1,img2):
-    return True
+
+    return faceRec(img1,img2)
 
 
 def GetCus(Id):
@@ -40,7 +45,8 @@ def ShowScaning(request):
 
 def ShowScanInfo(request,img):
     # 处理base64的img
-    if HongRuan(cu.face,img):
+    img1='C:/Users/huawei/Desktop/faceLib/9.jpg'
+    if HongRuan(cu.face,img1):
         person_dict={'id':cu.id,'name':cu.name,'sex':cu.sex}
         return render(request,'CheckIn/personInfo.html',person_dict)
     return render(request, 'CheckIn/welcome.html')
