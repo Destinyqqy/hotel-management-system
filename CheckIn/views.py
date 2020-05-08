@@ -3,12 +3,14 @@ from django.shortcuts import render
 from .models import customer,room
 from .CurrUser import CurrUser
 from CheckIn.faceRec.face_rec import faceRec
+import os,base64
+import json
 import cv2
 
 
 try:
     # 类的各属性理论上应在__init__函数中赋值，而不是在此处赋值
-    cu = CurrUser(id='123456789123456789',sex='男',name='xiaoming',face='C:/Users/huawei/Desktop/faceLib/8.jpg')
+    cu = CurrUser()
 except ValueError:
     cu = CurrUser(id='000000000000000000', sex='男', name='I_am_error')
 
@@ -17,9 +19,9 @@ def index(request):
     return render(request, 'CheckIn/welcome.html')
 
 
-def HongRuan(img1,img2):
+def HongRuan(fpath1,fpath2):
 
-    return faceRec(img1,img2)
+    return faceRec(fpath1,fpath2)
 
 
 def GetCus(Id):
@@ -43,10 +45,17 @@ def ShowScaning(request):
     return render(request,'CheckIn/scan.html')
 
 
-def ShowScanInfo(request,img):
-    # 处理base64的img
-    img1='C:/Users/huawei/Desktop/faceLib/9.jpg'
-    if HongRuan(cu.face,img1):
+def ShowScanInfo(request):
+    # 将传回的图片和身份证图片保存
+    if request.is_ajax():
+        get=request.POST.get('face','none')
+        img64=(str(get).split(',',1))[1]
+        print(img64)
+        with open('photo.jpeg', 'wb') as f:
+            f.write(base64.b64decode(img64))
+    fpath1="D:/system default files/Desktop/id.jpg"
+    fpath2="D:/files/比赛/服务外包/project/hotel-management-system/photo.jpeg"
+    if HongRuan(fpath1,fpath2):
         person_dict={'id':cu.id,'name':cu.name,'sex':cu.sex}
         return render(request,'CheckIn/personInfo.html',person_dict)
     return render(request, 'CheckIn/welcome.html')

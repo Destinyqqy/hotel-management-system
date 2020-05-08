@@ -12,7 +12,7 @@
   <div><button id="back"><a href={% url 'CheckIn:Index' %}>返回首页</a></button></div>
     <video id="video" width="480" height="320" controls></video>
   <div>
-    <button id="capture"><a href={% url 'CheckIn:ShowScanInfo' 1 %}>拍照</a></button>
+      <!--button id="capture"><a >拍照</a></button-->
     <h4 id="hint">将脸对准取景框确认身份 2s后自动获取人像</h4>
   </div>
   <canvas id="canvas" width="480" height="320"></canvas>
@@ -55,10 +55,12 @@
       //将canvas图像转换为base64字符串，设置格式以及压缩比例
       var dataUri =  canvas.toDataURL('image/jpeg', 90 / 100 );
       //将dataUri发送到后端
+
       $.ajax({
-          url:'python函数url',
+          url:'/CheckIn/personInfo/',
           type:'POST',
-          data:dataUri,
+          dataType: "json",
+          data: {'face':dataUri,csrfmiddlewaretoken: '{{ csrf_token }}'},
           success:function(){
               console.log('success');
           },
@@ -79,9 +81,7 @@
       alert('不支持访问用户媒体');
     }
 
-    document.getElementById('capture').addEventListener('click', function () {
-      context.drawImage(video, 0, 0, 480, 320);      
-    })
+
   </script>
 
 </body>
