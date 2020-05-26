@@ -37,18 +37,52 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',                  #跨域问题
     'CheckIn'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',            #跨域问题中间件
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+#跨域请求
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+
+#这个*表示所有其它请求都可以访问此站点，所以可以设置为有权限访问此站点的ip
+#下面就是关于对预检请求的处理，允许正式请求的请求方法和请求头字段
+CORS_ALLOW_METHODS = (
+'DELETE',
+'GET',
+'OPTIONS',
+'PATCH',
+'POST',
+'PUT',
+'VIEW',
+)
+
+CORS_ALLOW_HEADERS = (
+'XMLHttpRequest',
+'X_FILENAME',
+'accept-encoding',
+'authorization',
+'content-type',
+'dnt',
+'origin',
+'user-agent',
+'x-csrftoken',
+'x-requested-with',
+'Pragma',
+)
+
+#部署到云服务上必备
+ALLOWED_HOSTS = ['*']
 
 ROOT_URLCONF = 'hotelmanagement.urls'
 

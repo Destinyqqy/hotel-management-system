@@ -9,15 +9,15 @@
 </head>
 
 <body style="background-image: url({% static "img/bkg.png"%});">
-  <div><button id="back"><a href={% url 'CheckIn:Index' %}>返回首页</a></button></div>
-    <video id="video" width="480" height="320" controls></video>
+  <div><button id="back"><a href=".." style="color:coral;font-size: 20px;">返回首页</a></button></div>
+     <video id="video" width="480" height="320" controls></video>
   <div>
-      <!--button id="capture"><a >拍照</a></button-->
+    <button id="capture">拍照</button>
     <h4 id="hint">将脸对准取景框确认身份 2s后自动获取人像</h4>
   </div>
   <canvas id="canvas" width="480" height="320"></canvas>
 <!--引入jquery,Ajax向后端传图片数据-->
-  <script src="{% static "js/jquery-3.3.1.js" %}"></script>
+  <script src="../../../static/js/jquery-3.3.1.js"></script>
 
   <script type="text/javascript">
     //访问用户媒体设备的兼容方法
@@ -53,21 +53,19 @@
       //2s后获取图像
       setInterval(function(){ context.drawImage(video, 0, 0, 480, 320);  }, 2000);
       //将canvas图像转换为base64字符串，设置格式以及压缩比例
-      var dataUri =  canvas.toDataURL('image/jpeg', 90 / 100 );
+      var dataUri =  canvas.toDataURL('image/png');
       //将dataUri发送到后端
-
-      $.ajax({
-          url:'/CheckIn/personInfo/',
-          type:'POST',
-          dataType: "json",
-          data: {'face':dataUri,csrfmiddlewaretoken: '{{ csrf_token }}'},
-          success:function(){
-              console.log('success');
-          },
-          error:function(){
-              console.log('failed');
-          }
-      });
+      // $.ajax({
+      //     url:'/CheckIn/ShowScanInfo/',
+      //     type:'POST',
+      //     data:dataUri,
+      //     success:function(){
+      //         console.log('success');
+      //     },
+      //     error:function(){
+      //         console.log('failed');
+      //     }
+      // });
     }
 
     function error(error) {
@@ -81,7 +79,36 @@
       alert('不支持访问用户媒体');
     }
 
-
+    document.getElementById('capture').addEventListener('click', function () {
+      context.drawImage(video, 0, 0, 480, 320);   
+      var base64Img = canvas.toDataURL('image/jpeg');
+      // var oA = document.createElement('a');
+      // oA.href = base64Img;
+      // oA.download = 'webphoto.png'; // 下载的文件名可以此处修改
+      // oA.click();
+      var formdata=new FormData()
+      formdata.append('face',base64Img)
+      $.ajax({
+             type: "post",
+             url:  "/CheckIn/personInfo/",
+             data: formdata,
+             dataType: 'json',
+             processData: false, // 告诉jQuery不要去处理发送的数据
+             contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+             xhrFields:{withCredentials:true},
+             async: true,    //默认是true：异步，false：同步。
+             
+             success: function (data) {
+                 if(data.msg=='exist'){
+                   window.location='/CheckIn/PersonInfo?id='+data.id+'&name='+data.name+'&sex='+data.sex
+                 }
+             },
+             error: function (data) {
+               console.log(error)
+               window.location='/CheckIn/scan/'
+             },
+         });
+    })
   </script>
 
 </body>

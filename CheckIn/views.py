@@ -1,4 +1,3 @@
-
 from django.shortcuts import render
 from .models import customer,room
 from .CurrUser import CurrUser
@@ -6,7 +5,11 @@ from CheckIn.faceRec.face_rec import faceRec
 import os,base64
 import json
 import cv2
-
+import urllib
+import numpy as np
+from django.views.decorators.csrf import csrf_exempt  # 跨站点验证
+from django.http import JsonResponse   # json字符串返回
+from django.views.decorators.csrf import csrf_exempt
 
 try:
     # 类的各属性理论上应在__init__函数中赋值，而不是在此处赋值
@@ -42,23 +45,42 @@ def GetRoom(Id):
 
 
 def ShowScaning(request):
+    
     return render(request,'CheckIn/scan.html')
 
-
+@csrf_exempt
 def ShowScanInfo(request):
     # 将传回的图片和身份证图片保存
     if request.is_ajax():
         get=request.POST.get('face','none')
         img64=(str(get).split(',',1))[1]
-        print(img64)
-        with open('photo.jpeg', 'wb') as f:
+        # print(img64)
+        with open('photo.jpg', 'wb') as f:
             f.write(base64.b64decode(img64))
-    fpath1="D:/system default files/Desktop/id.jpg"
-    fpath2="D:/files/比赛/服务外包/project/hotel-management-system/photo.jpeg"
-    if HongRuan(fpath1,fpath2):
-        person_dict={'id':cu.id,'name':cu.name,'sex':cu.sex}
-        return render(request,'CheckIn/personInfo.html',person_dict)
-    return render(request, 'CheckIn/welcome.html')
+    fpath1="./photo.jpg"
+    dirPath='./facelib'
+    filepath=readAllPath(dirPath)
+    for fpath in filepath:
+        if HongRuan(fpath1,fpath):
+            person_dict={'id':cu.id,'name':cu.name,'sex':cu.sex,'msg':'exist'}
+            # return JsonResponse({'id':cu.id,'name':cu.name,'sex':cu.sex,'msg':'exist'})
+            return JsonResponse({'id':cu.id,'name':cu.name,'sex':cu.sex,'msg':'exist'})
+    return JsonResponse({'msg':'inexist'})
+
+def readAllPath(path):   
+    '''
+    获取一个目录下的所有文件
+    '''  
+    # 所有文件  
+    fileList = []  
+    # 返回一个列表，其中包含在目录条目的名称
+    files = os.listdir(path)
+    for f in files:  
+        if(os.path.isfile(path + '/' + f)):  
+            # 添加文件  
+            fileList.append(path+'/'+f)  
+
+    return fileList
 
 
 def SplitFlow(request):
@@ -81,7 +103,8 @@ def AgreePrivacy(request,agree):
 
 # 以下为测试代码
 def PersonInfo(request):
-    return render(request,"CheckIn/personInfo.html")
+    person_dict={'id':cu.id,'name':cu.name,'sex':cu.sex,'msg':'exist'}
+    return render(request,"CheckIn/personInfo.html",person_dict)
 
 def SelectRoomType(request,room_type):
      try:

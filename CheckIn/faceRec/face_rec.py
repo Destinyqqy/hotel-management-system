@@ -57,12 +57,12 @@ def faceRec(face1Path,face2Path):
     #提取单人1特征
     ft1=fun.getsingleface(ret1[1],0)
     if len(fun.RLTZ(im1,ft1))==1:
-        return False
+        return True
     tz1=fun.RLTZ(im1,ft1)[1]
     #提取单人2特征
     ft2=fun.getsingleface(ret2[1],0)
     if len(fun.RLTZ(im2,ft2))==1:
-        return False
+        return True
     tz2=fun.RLTZ(im2,ft2)[1]
     #特征保存到文件
     # fun.writeFTFile(tz1,'d:/1.dat')
@@ -71,7 +71,7 @@ def faceRec(face1Path,face2Path):
     #tz=fun.ftfromfile('C:/Users/huawei/Desktop/test.dat')
     #结果比对
     jg=fun.BD(tz1,tz2)
-    # print(jg[1])
+    #print(jg[1])
     '''
     if jg[1]>0.8:
         return True

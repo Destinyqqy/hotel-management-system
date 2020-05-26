@@ -55,7 +55,9 @@ def RLTZ(im,ft):
         # print('提取特征成功:',detectedFaces.featureSize,mem)
         return ret,retz
     else:
-        return ret
+        retlist=[]
+        retlist.append(ret)
+        return retlist
 #特征值比对,返回比对结果
 def BD(tz1,tz2):
     jg=c_float()
